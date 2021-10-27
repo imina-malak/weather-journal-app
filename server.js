@@ -27,7 +27,6 @@ function sendData (request, response) {
     response.send(projectData);
     projectData=[];
 };
-
 // POST route
 app.post('/add', add);
 function add(req,res){
