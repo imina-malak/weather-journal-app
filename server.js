@@ -38,5 +38,3 @@ function add(req,res){
     }
     projectData.push(newEntry);
 }
-
-
