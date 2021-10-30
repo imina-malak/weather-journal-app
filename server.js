@@ -32,9 +32,9 @@ function sendData (request, response) {
 app.post('/posting', posting);
 function posting(req,res){
     finalData={
-        temp: req.body.temp,
-        date: req.body.date,
-        content: req.body.content
+        Temperature: req.body.temp,
+        Date: req.body.date,
+        Feelings: req.body.content
         }
     console.log(finalData);
     projectData.push(finalData);
