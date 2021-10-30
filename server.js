@@ -25,6 +25,7 @@ function activeServer(){
 app.get('/Total', sendData);
 function sendData (request, response) {
     response.send(projectData);
+    // to make the array empty to hold new data 
     projectData=[];
 };
 // POST route
