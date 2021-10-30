@@ -19,21 +19,21 @@ const port = 8080;
 const server = app.listen(port, activeServer);
 function activeServer(){
     console.log("server running");
-    console.log(`server is running on  localhost:${port}`)
+    console.log(`server is running on localhost:${port}`)
 }
 // GET route
-app.get('/all', sendData);
+app.get('/Total', sendData);
 function sendData (request, response) {
     response.send(projectData);
-    projectData=[];
 };
 // POST route
-app.post('/add', add);
-function add(req,res){
-    newEntry={
+app.post('/posting', posting);
+function posting(req,res){
+    finalData={
     temp: req.body.temp,
     date: req.body.date,
     content: req.body.content
     }
-    projectData.push(newEntry);
+    console.log(finalData);
+    projectData.push(finalData);
 }

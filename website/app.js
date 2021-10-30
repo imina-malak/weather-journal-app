@@ -1,33 +1,23 @@
 let d = new Date()
 // Create a new date instance dynamically with JS
-let newDate = d.getMonth()+1+'.'+ d.getDate()+'.'+ d.getFullYear();
+let newDate = d.getMonth()+1+'/'+ d.getDate()+'/'+ d.getFullYear();
 /* Global Variables */
-let baseURL = 'https://api.openweathermap.org/data/2.5/weather?zip='
-const apiKey ="2526672c019a649b32d1fca91317d30e"
+let URL = 'https://api.openweathermap.org/data/2.5/weather?zip='
+const Key ="2526672c019a649b32d1fca91317d30e"
 // when we click on genetate button 
 document.getElementById('generate').addEventListener("click", Go);
-function Go(e){
+//the Go function will execute when clicking
+async function Go(e){
     // get the data from inputs
     const zip =  document.getElementById('zip').value;
     const feelings =  document.getElementById('feelings').value;
-    getWeather(baseURL, zip , apiKey)
-    .then(function(data){
-        postData('/add',{date:newDate,temp:data.main.temp,content:feelings}
-        ).then(updateUI())
-    })
-}
-// get the data from API
-async function getWeather(baseURL, zip , apiKey){
-    const response = await fetch(`${baseURL}${zip},us&appid=${apiKey}`)
-    try{
-        const data = await response.json();
-        return data;
-    }catch(error){
-        console.log("error", error);
-    }
+    // get information from API
+    const response = await fetch(`${URL}${zip},us&appid=${Key}`);
+    let Temps = await response.json();
+    sendTemps('/posting',{date:newDate,temp:Temps.main.temp,content:feelings}).then(updateUI())
 }
 // send data to the server
-async function postData (url = '',data = {}){
+async function sendTemps (url = '',data = {}){
     const response = await fetch(url, {
     method: 'POST',
     credentials: 'same-origin',
@@ -37,22 +27,25 @@ async function postData (url = '',data = {}){
     body: JSON.stringify(data),
     });
     try{
-        const newData = await response.json();
-        console.log(newData);
-        return newData;
+        const updatedData = await response.json();
+        console.log(updatedData);
+        return updatedData;
     }catch(error){
     console.log("error", error);
     }
 }
 //to Update the data
 async function updateUI() {
-    const req = await fetch('/all')
+    const req = await fetch('/Total')
     try{
         const allData =await req.json()
-        document.getElementById('date').innerHTML= `Date: ${allData[0].date}`;
-        document.getElementById('temp').innerHTML= `Temprature: ${allData[0].temp}`;
-        document.getElementById('content').innerHTML=`I feel ${allData[0].content}`;
+        const date = document.getElementById('date');
+        const temp = document.getElementById('temp');
+        const content = document.getElementById('content');
+        date.innerHTML = `Today is: ${allData[0].date}`;
+        temp.innerHTML =`Temprature: ${allData[0].temp}`;
+        content.innerHTML =`I feel ${allData[0].content}`;
     }catch(error) {
         console.log("error", error);
-    }
+    }projectData=[];
 }
