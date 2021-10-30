@@ -47,5 +47,5 @@ async function updateUI() {
         content.innerHTML =`I feel ${allData[0].content}`;
     }catch(error) {
         console.log("error", error);
-    }projectData=[];
+    }
 }

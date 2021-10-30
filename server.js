@@ -25,15 +25,16 @@ function activeServer(){
 app.get('/Total', sendData);
 function sendData (request, response) {
     response.send(projectData);
+    projectData=[];
 };
 // POST route
 app.post('/posting', posting);
 function posting(req,res){
     finalData={
-    temp: req.body.temp,
-    date: req.body.date,
-    content: req.body.content
-    }
+        temp: req.body.temp,
+        date: req.body.date,
+        content: req.body.content
+        }
     console.log(finalData);
     projectData.push(finalData);
 }
