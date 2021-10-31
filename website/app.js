@@ -42,9 +42,9 @@ async function updateUI() {
         const Date = document.getElementById('date');
         const Temperature = document.getElementById('temp');
         const Feelings = document.getElementById('content');
-        Date.innerHTML = `Today is: ${allData[0].Date}`;
-        Temperature.innerHTML =`Temprature: ${allData[0].Temperature}`;
-        Feelings.innerHTML =`I feel ${allData[0].Feelings}`;
+        Date.innerHTML = `Today is: ${allData.Date}`;
+        Temperature.innerHTML =`Temprature: ${allData.Temperature}`;
+        Feelings.innerHTML =`I feel ${allData.Feelings}`;
     }catch(error) {
         console.log("error", error);
     }
